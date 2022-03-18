@@ -44,6 +44,9 @@
       on:click={() => {
         const date = new Date(selectedDate);
         date.setDate(date.getDate() + 1);
+        if (date.getTime() < wordleEpoch.getTime()) {
+          return (solution = 'The date must be after June 19th, 2021');
+        }
         solution = getSolution(date);
       }}
       type="button"
