@@ -20,9 +20,9 @@
   $: selectedDate = '';
 </script>
 
-<div id="main" class="flex content-center justify-center">
+<div id="main" class="flex content-center justify-center flex-col items-center">
   <div
-    class="grid content-center mt-6 rounded-lg border-slate-300 border-[1px] p-6 gap-4"
+    class="max-w-lg grid content-center mt-6 rounded-lg border-slate-300 border-[1px] p-6 gap-4"
   >
     <h1
       class="text-center text-gray-900 text-3xl font-extrabold tracking-tight "
@@ -52,6 +52,16 @@
       View Solution
     </button>
 
-    <p>{solution == undefined ? 'You must choose a date' : solution}</p>
+    <p class="text-center">
+      {solution == undefined ? 'You must choose a date' : solution}
+    </p>
   </div>
+  <a
+    class="text-center underline text-slate-400 hover:text-slate-500"
+    target="_blank"
+    rel="noopener"
+    href="https://github.com/MajesticString/wordle-answer-finder"
+  >
+    Source Code
+  </a>
 </div>
