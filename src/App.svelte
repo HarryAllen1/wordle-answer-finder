@@ -1,5 +1,32 @@
 <script lang="ts">
   import { solutionList } from './lib/word-list';
+  import { initializeApp } from 'firebase/app';
+  import {
+    getFirestore,
+    doc,
+    setDoc,
+    getDoc,
+    Firestore,
+  } from 'firebase/firestore';
+
+  const app = initializeApp({
+    apiKey: 'AIzaSyDrtSNOgy7GO3O2T_wJlVfR5Xi4uPFQOec',
+    authDomain: 'wordle-solution-finder.firebaseapp.com',
+    projectId: 'wordle-solution-finder',
+    storageBucket: 'wordle-solution-finder.appspot.com',
+    messagingSenderId: '360937075654',
+    appId: '1:360937075654:web:7f5e73e59ccaaf37c678c7',
+  });
+  const db = getFirestore(app);
+
+  const logEvent = async (db: Firestore, event: string) => {
+    const currentCount = await getDoc(doc(db, 'events', event));
+    await setDoc(doc(db, 'events', event), {
+      count: (currentCount.data()?.count ?? 0) + 1,
+    });
+  };
+
+  logEvent(db, 'page_visit');
 
   const wordleEpoch = new Date(2021, 5, 19, 0, 0, 0, 0);
 
@@ -45,8 +72,10 @@
         const date = new Date(selectedDate);
         date.setDate(date.getDate() + 1);
         if (date.getTime() < wordleEpoch.getTime()) {
+          logEvent(db, 'someone_is_an_idiot');
           return (solution = 'The date must be after June 19th, 2021');
         }
+        logEvent(db, 'solution_found');
         solution = getSolution(date);
       }}
       type="button"
