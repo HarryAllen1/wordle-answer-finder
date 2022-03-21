@@ -13,6 +13,9 @@
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
     "@tailwindcss/forms": "^0.5.0",
     "@tsconfig/svelte": "^2.0.1",
+    "@types/luxon": "^2.3.1",
+    "@types/seedrandom": "^3.0.2",
+    "@types/tailwindcss": "^3.0.9",
     "autoprefixer": "^10.4.4",
     "postcss": "^8.4.12",
     "sass": "^1.49.9",
@@ -25,6 +28,9 @@
     "vite": "^2.8.0"
   },
   "dependencies": {
-    "firebase": "^9.6.9"
+    "@rgossiaux/svelte-headlessui": "^1.0.0-beta.12",
+    "firebase": "^9.6.9",
+    "luxon": "^2.3.1",
+    "seedrandom": "^3.0.5"
   }
 }

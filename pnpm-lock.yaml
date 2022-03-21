@@ -1,13 +1,19 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@rgossiaux/svelte-headlessui': ^1.0.0-beta.12
   '@sveltejs/vite-plugin-svelte': ^1.0.0-next.30
   '@tailwindcss/forms': ^0.5.0
   '@tsconfig/svelte': ^2.0.1
+  '@types/luxon': ^2.3.1
+  '@types/seedrandom': ^3.0.2
+  '@types/tailwindcss': ^3.0.9
   autoprefixer: ^10.4.4
   firebase: ^9.6.9
+  luxon: ^2.3.1
   postcss: ^8.4.12
   sass: ^1.49.9
+  seedrandom: ^3.0.5
   svelte: ^3.44.0
   svelte-check: ^2.2.7
   svelte-preprocess: ^4.9.8
@@ -17,12 +23,18 @@ specifiers:
   vite: ^2.8.0
 
 dependencies:
+  '@rgossiaux/svelte-headlessui': 1.0.0-beta.12_svelte@3.46.4
   firebase: 9.6.9
+  luxon: 2.3.1
+  seedrandom: 3.0.5
 
 devDependencies:
   '@sveltejs/vite-plugin-svelte': 1.0.0-next.39_svelte@3.46.4+vite@2.8.6
   '@tailwindcss/forms': 0.5.0_tailwindcss@3.0.23
   '@tsconfig/svelte': 2.0.1
+  '@types/luxon': 2.3.1
+  '@types/seedrandom': 3.0.2
+  '@types/tailwindcss': 3.0.9
   autoprefixer: 10.4.4_postcss@8.4.12
   postcss: 8.4.12
   sass: 1.49.9
@@ -587,6 +599,14 @@ packages:
     resolution: {integrity: sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=}
     dev: false
 
+  /@rgossiaux/svelte-headlessui/1.0.0-beta.12_svelte@3.46.4:
+    resolution: {integrity: sha512-UgLV9PwlwkJYObYSzxm5kh5HbyEps3oMbihL1BY7CpZ26j0q6O6WaG4d95eiMilhzyHfRYRm/VLyNPJISBFqAA==}
+    peerDependencies:
+      svelte: ^3.44.0
+    dependencies:
+      svelte: 3.46.4
+    dev: false
+
   /@rollup/pluginutils/4.2.0:
     resolution: {integrity: sha512-2WUyJNRkyH5p487pGnn4tWAsxhEFKN/pT8CMgHshd5H+IXkOnKvKZwsz5ZWz+YCXkleZRAU5kwbfgF8CPfDRqA==}
     engines: {node: '>= 8.0.0'}
@@ -634,6 +654,10 @@ packages:
     resolution: {integrity: sha512-5tXH6Bx/kNGd3MgffdmP4dy2Z+G4eaXw0SE81Tq3BNadtnMR5/ySMzX4SLEzHJzSmPNn4HIdpQsBvXMUykr58w==}
     dev: false
 
+  /@types/luxon/2.3.1:
+    resolution: {integrity: sha512-nAPUltOT28fal2eDZz8yyzNhBjHw1NEymFBP7Q9iCShqpflWPybxHbD7pw/46jQmT+HXOy1QN5hNTms8MOTlOQ==}
+    dev: true
+
   /@types/node/17.0.21:
     resolution: {integrity: sha512-DBZCJbhII3r90XbQxI8Y9IjjiiOGlZ0Hr32omXIZvwwZ7p4DMMXGrKXVyPfuoBOri9XNtL0UK69jYIBIsRX3QQ==}
 
@@ -649,6 +673,14 @@ packages:
     resolution: {integrity: sha512-BPdoIt1lfJ6B7rw35ncdwBZrAssjcwzI5LByIrYs+tpXlj/CAkuVdRsgZDdP4lq5EjyWzwxZCqAoFyHKFwp32g==}
     dependencies:
       '@types/node': 17.0.21
+    dev: true
+
+  /@types/seedrandom/3.0.2:
+    resolution: {integrity: sha512-YPLqEOo0/X8JU3rdiq+RgUKtQhQtrppE766y7vMTu8dGML7TVtZNiiiaC/hhU9Zqw9UYopXxhuWWENclMVBwKQ==}
+    dev: true
+
+  /@types/tailwindcss/3.0.9:
+    resolution: {integrity: sha512-uZjNKNjlA6cr6py/GWsDjevJb/Bl0fmaMNUdIpNMW3TJGJzxN9O6uFWx97LiSK7ithWNrrDSytq1FdvHpgSvWg==}
     dev: true
 
   /acorn-node/1.8.2:
@@ -1385,6 +1417,11 @@ packages:
     resolution: {integrity: sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==}
     dev: false
 
+  /luxon/2.3.1:
+    resolution: {integrity: sha512-I8vnjOmhXsMSlNMZlMkSOvgrxKJl0uOsEzdGgGNZuZPaS9KlefpE9KV95QFftlJSC+1UyCC9/I69R02cz/zcCA==}
+    engines: {node: '>=12'}
+    dev: false
+
   /magic-string/0.25.9:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
     dependencies:
@@ -1719,6 +1756,10 @@ packages:
       immutable: 4.0.0
       source-map-js: 1.0.2
     dev: true
+
+  /seedrandom/3.0.5:
+    resolution: {integrity: sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==}
+    dev: false
 
   /selenium-webdriver/4.0.0-rc-1:
     resolution: {integrity: sha512-bcrwFPRax8fifRP60p7xkWDGSJJoMkPAzufMlk5K2NyLPht/YZzR2WcIk1+3gR8VOCLlst1P2PI+MXACaFzpIw==}
