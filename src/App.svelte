@@ -89,7 +89,7 @@
 >
   <div class="w-72 mt-5">
     <div class="relative">
-      Wordle Varient:
+      Wordle Variant:
       <Listbox
         value={defaultWordle}
         on:change={(e) => {
