@@ -18,6 +18,7 @@
   import { getCountry } from './lib/worldle';
   import { DateTime } from 'luxon';
   import { onMount } from 'svelte';
+  import { getBrdl } from './lib/brdl';
 
   const supportedWordles = [
     {
@@ -27,6 +28,10 @@
     {
       id: 2,
       name: 'Worldle',
+    },
+    {
+      id: 3,
+      name: 'Brdl',
     },
   ];
 
@@ -77,9 +82,7 @@
   };
   let solution = '';
   const currentDate = new Date();
-  $: selectedDate = `${currentDate.getFullYear()}-${
-    currentDate.getMonth() + 1
-  }-${currentDate.getDate()}`;
+  $: selectedDate = DateTime.now().minus({ days: 1 }).toJSDate();
   $: selectedDate, logEvent(db, 'date_selected');
 </script>
 
@@ -107,14 +110,33 @@
           {#each supportedWordles as wordle (wordle.id)}
             <ListboxOption
               class={({ active }) =>
-                `cursor-default select-none relative py-2 pl-10 pr-4 ${
+                `cursor-default select-none flex flex-row relative py-2 pl-10 pr-4 ${
                   active ? 'text-blue-900 bg-blue-100' : 'text-gray-900'
                 }`}
               value={wordle}
+              let:active
+              let:selected
             >
               <span class={`block truncate ${'font-normal'}`}>
                 {wordle.name}
               </span>
+              {#if selected}
+                <div class="flex-grow" />
+                <span
+                  class={'absolute inset-y-0 right-0 flex items-center pr-4' +
+                  active
+                    ? 'text-opacity-0'
+                    : 'text-indigo-600'}
+                >
+                  <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </span>
+              {/if}
             </ListboxOption>
           {/each}
         </ListboxOptions>
@@ -128,12 +150,11 @@
     <h1
       class="text-center text-gray-900 text-3xl font-extrabold tracking-tight "
     >
-      Wor{defaultWordle.name === 'Worldle' ? 'l' : ''}dle Solution Finder
+      {defaultWordle.name} Solution Finder
     </h1>
     <p class="text-center">
-      A program that finds the Wor{defaultWordle.name === 'Worldle'
-        ? 'l'
-        : ''}dle solution for any day, even in the future.
+      A program that finds the {defaultWordle.name} solution for any day, even in
+      the future.
     </p>
     <div class="w-full flex justify-center ">
       <input
@@ -147,16 +168,25 @@
       on:click={() => {
         const date = new Date(selectedDate);
         date.setDate(date.getDate() + 1);
-        if (date.getTime() < wordleEpoch.getTime()) {
+        if (
+          defaultWordle.name !== 'Brdl' &&
+          date.getTime() < wordleEpoch.getTime()
+        ) {
           logEvent(db, 'someone_is_an_idiot');
           return (solution = 'The date must be after June 19th, 2021');
+        } else if (
+          defaultWordle.name === 'Brdl' &&
+          date.getTime() < new Date('1/23/2022').getTime()
+        ) {
+          logEvent(db, 'someone_is_an_idiot');
+          return (solution = 'The date must be after 1/23/2022');
         }
         logEvent(db, 'solution_found');
-        console.log(selectedDate);
         solution =
           defaultWordle.name === 'Wordle'
             ? getSolution(date)
-            : `${
+            : defaultWordle.name === 'Worldle'
+            ? `${
                 getCountry(DateTime.fromJSDate(date).toFormat('yyyy-MM-dd'))
                   .name
               } (lat: ${
@@ -165,7 +195,8 @@
               }, long: ${
                 getCountry(DateTime.fromJSDate(date).toFormat('yyyy-MM-dd'))
                   .longitude
-              })`;
+              })`
+            : getBrdl(new Date(selectedDate));
       }}
       type="button"
       class="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
@@ -174,7 +205,7 @@
     </button>
 
     <p class="text-center">
-      {solution == undefined ? 'You must choose a date' : solution}
+      {solution ?? 'You must choose a date'}
     </p>
   </div>
   <a
